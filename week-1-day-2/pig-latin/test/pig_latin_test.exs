@@ -59,12 +59,12 @@ defmodule PigLatinTest do
       assert PigLatin.translate("pleasure") == "easureplay"
     end
 
-    # @tag :pending
+    #@tag :pending
     test "word beginning with three consonants" do
       assert PigLatin.translate("stringify") == "ingifystray"
     end
 
-    @tag :pending
+    #@tag :pending
     test "word beginning with a series of consonants : aliens speak Pig Latin too" do
       assert PigLatin.translate("zkrrkrkrkrzzzkewk") == "ewkzkrrkrkrkrzzzkay"
     end
@@ -108,41 +108,41 @@ defmodule PigLatinTest do
       assert PigLatin.translate("yttria") == "yttriaay"
     end
 
-    @tag :pending
+    # @tag :pending
     test "word beginning with y, followed by another consonant" do
       assert PigLatin.translate("yddria") == "yddriaay"
     end
 
-    @tag :pending
+    # @tag :pending
     test "word beginning with xr" do
       assert PigLatin.translate("xray") == "xrayay"
     end
 
-    @tag :pending
+    # @tag :pending
     test "word beginning with xb" do
       assert PigLatin.translate("xbot") == "xbotay"
     end
   end
 
   describe "position of y in a word determines if it is a consonant or a vowel" do
-    @tag :pending
+    # @tag :pending
     test "y is treated like a consonant at the beginning of a word" do
       assert PigLatin.translate("yellow") == "ellowyay"
     end
 
-    @tag :pending
+    #@tag :pending
     test "y is treated like a vowel at the end of a consonant cluster" do
       assert PigLatin.translate("rhythm") == "ythmrhay"
     end
 
-    @tag :pending
+    # @tag :pending
     test "y as second letter in two letter word" do
       assert PigLatin.translate("my") == "ymay"
     end
   end
 
   describe "phrases are translated" do
-    @tag :pending
+    # @tag :pending
     test "a whole phrase" do
       assert PigLatin.translate("quick fast run") == "ickquay astfay unray"
     end
