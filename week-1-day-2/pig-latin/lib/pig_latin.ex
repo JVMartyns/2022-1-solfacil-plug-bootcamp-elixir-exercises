@@ -37,8 +37,10 @@ defmodule PigLatin do
             String.at(word, 0) == "y" ->
           String.slice(word, 1..-1) <> String.at(word, 0) <> "ay"
 
-        # Must pass the following test
         # "y is treated like a vowel at the end of a consonant cluster"
+        String.at(word, 0) in consonants and String.at(word, 1) in consonants and
+        String.at(word, 2) == "y" ->
+          String.slice(word, 2..-1) <> String.slice(word, 0..1) <> "ay"
 
         # "word beginning with two consonants"
         # "word beginning with three consonants"
@@ -51,8 +53,8 @@ defmodule PigLatin do
     |> Enum.join(" ")
   end
 
-  def teste(word, vowels) do
-    vogais = palavra = String.split(word, "", trim: true)
+  defp teste(word, vowels) do
+    palavra = String.split(word, "", trim: true)
 
     Enum.reduce_while(palavra, 0, fn letra, acc ->
       if letra in vowels do

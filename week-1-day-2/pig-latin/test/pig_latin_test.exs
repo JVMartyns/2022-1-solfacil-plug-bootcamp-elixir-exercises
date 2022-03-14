@@ -59,12 +59,12 @@ defmodule PigLatinTest do
       assert PigLatin.translate("pleasure") == "easureplay"
     end
 
-    #@tag :pending
+    # @tag :pending
     test "word beginning with three consonants" do
       assert PigLatin.translate("stringify") == "ingifystray"
     end
 
-    #@tag :pending
+    # @tag :pending
     test "word beginning with a series of consonants : aliens speak Pig Latin too" do
       assert PigLatin.translate("zkrrkrkrkrzzzkewk") == "ewkzkrrkrkrkrzzzkay"
     end
@@ -130,7 +130,7 @@ defmodule PigLatinTest do
       assert PigLatin.translate("yellow") == "ellowyay"
     end
 
-    #@tag :pending
+    # @tag :pending
     test "y is treated like a vowel at the end of a consonant cluster" do
       assert PigLatin.translate("rhythm") == "ythmrhay"
     end
