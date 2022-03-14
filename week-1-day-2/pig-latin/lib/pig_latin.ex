@@ -27,7 +27,10 @@ defmodule PigLatin do
           String.slice(word, 3..-1) <> String.slice(word, 0..2) <> "ay"
 
         # word beginning with th or qu or ch
-        String.slice(word, 0..1) in ["th", "qu", "ch"] ->
+        # "y is treated like a vowel at the end of a consonant cluster"
+        String.slice(word, 0..1) in ["th", "qu", "ch"] or
+            (String.at(word, 0) in consonants and String.at(word, 1) in consonants and
+               String.at(word, 2) == "y") ->
           String.slice(word, 2..-1) <> String.slice(word, 0..1) <> "ay"
 
         # "y is treated like a consonant at the beginning of a word"
@@ -36,11 +39,6 @@ defmodule PigLatin do
         (String.length(word) == 2 and String.at(word, 1) == "y") or
             String.at(word, 0) == "y" ->
           String.slice(word, 1..-1) <> String.at(word, 0) <> "ay"
-
-        # "y is treated like a vowel at the end of a consonant cluster"
-        String.at(word, 0) in consonants and String.at(word, 1) in consonants and
-        String.at(word, 2) == "y" ->
-          String.slice(word, 2..-1) <> String.slice(word, 0..1) <> "ay"
 
         # "word beginning with two consonants"
         # "word beginning with three consonants"
@@ -53,6 +51,7 @@ defmodule PigLatin do
     |> Enum.join(" ")
   end
 
+  #
   defp teste(word, vowels) do
     palavra = String.split(word, "", trim: true)
 
