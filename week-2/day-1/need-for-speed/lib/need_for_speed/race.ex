@@ -1,7 +1,7 @@
 defmodule NeedForSpeed.Race do
   defstruct [
     :title,
-    :total_distance_in_meters 0,
+    :total_distance_in_meters,
     cars: []
   ]
 

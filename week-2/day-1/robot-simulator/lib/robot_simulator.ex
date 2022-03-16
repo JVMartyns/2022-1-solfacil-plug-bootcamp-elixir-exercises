@@ -1,5 +1,4 @@
 defmodule RobotSimulator do
-
   defstruct direction: :north, position: {0, 0}
   @valid_directions [:north, :east, :south, :west]
 
@@ -37,8 +36,50 @@ defmodule RobotSimulator do
   """
   @spec simulate(robot :: any, instructions :: String.t()) :: any
   def simulate(robot, instructions) do
-    case instructions do
+    instructions_list = String.split(instructions, "", trim: true)
 
+    Enum.map(instructions_list, fn instruction ->
+      case instruction do
+        "R" -> turn_right(robot)
+        "L" -> nil
+        "A" -> nil
+      end
+    end)
+  end
+
+  defp atual_direction(robot) do
+    Enum.find_index(@valid_directions, fn direction -> direction == robot.direction end)
+  end
+
+  defp turn_right(robot) do
+    new_list_directions =
+      Enum.slice(@valid_directions, atual_direction(robot)..-1) ++
+        Enum.slice(@valid_directions, 0..(atual_direction(robot) - 1))
+    new_direction = Enum.at(new_list_directions, atual_direction(robot) + 1)
+    %{robot | direction: new_direction}
+    |> Enum.at(0)
+  end
+
+  #  new_list_directions =
+  #  [Enum.at(new_list_directions, atual_direction(robot) - 1),
+
+  # new_direction = Enum.at(new_list_directions, atual_direction(robot) - 1)
+
+  defp turn_left(robot) do
+    new_list_directions =
+      Enum.slice(@valid_directions, atual_direction(robot)..-1) ++
+        Enum.slice(@valid_directions, 0..(atual_direction(robot) - 1))
+    new_direction = Enum.at(new_list_directions, atual_direction(robot) - 1)
+    %{robot | direction: new_direction}
+    |> Enum.at(0)
+  end
+
+  defp advance(robot) do
+    case robot.direction do
+      :north -> nil
+      :east -> nil
+      :south -> nil
+      :west -> nil
     end
   end
 
