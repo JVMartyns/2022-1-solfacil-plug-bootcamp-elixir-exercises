@@ -38,10 +38,10 @@ defmodule RobotSimulator do
   def simulate(robot, instructions) do
     instructions_list = String.split(instructions, "", trim: true)
 
-    Enum.map(instructions_list, fn instruction ->
+    Enum.reduce(instructions_list, robot, fn instruction, acc ->
       case instruction do
         "R" -> turn_right(robot)
-        "L" -> nil
+        "L" -> turn_left(robot)
         "A" -> nil
       end
     end)
@@ -51,36 +51,38 @@ defmodule RobotSimulator do
     Enum.find_index(@valid_directions, fn direction -> direction == robot.direction end)
   end
 
-  defp turn_right(robot) do
-    new_list_directions =
-      Enum.slice(@valid_directions, atual_direction(robot)..-1) ++
-        Enum.slice(@valid_directions, 0..(atual_direction(robot) - 1))
-    new_direction = Enum.at(new_list_directions, atual_direction(robot) + 1)
+  def turn_right(robot) do
+    new_direction =
+    case robot.direction do
+      :north -> :east
+      :east -> :south
+      :south -> :west
+      :west -> :north
+    end
     %{robot | direction: new_direction}
-    |> Enum.at(0)
   end
 
-  #  new_list_directions =
-  #  [Enum.at(new_list_directions, atual_direction(robot) - 1),
-
-  # new_direction = Enum.at(new_list_directions, atual_direction(robot) - 1)
-
   defp turn_left(robot) do
-    new_list_directions =
-      Enum.slice(@valid_directions, atual_direction(robot)..-1) ++
-        Enum.slice(@valid_directions, 0..(atual_direction(robot) - 1))
-    new_direction = Enum.at(new_list_directions, atual_direction(robot) - 1)
-    %{robot | direction: new_direction}
-    |> Enum.at(0)
+    new_direction =
+      case robot.direction do
+        :north -> :west
+        :east -> :north
+        :south -> :east
+        :west -> :south
+      end
+      %{robot | direction: new_direction}
   end
 
   defp advance(robot) do
+    {x, y} = robot.position
+    new_position =
     case robot.direction do
-      :north -> nil
-      :east -> nil
-      :south -> nil
-      :west -> nil
+      :north -> {x, y + 1}
+      :east -> {x + 1, y}
+      :south -> {x, y -1}
+      :west -> {x -1, y +1}
     end
+    %{robot | position: new_position}
   end
 
   @doc """
