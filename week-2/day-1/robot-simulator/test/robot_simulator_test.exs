@@ -89,7 +89,7 @@ defmodule RobotSimulatorTest do
     assert RobotSimulator.position(robot4) == {0, 0}
   end
 
-  @tag :pending
+  # @tag :pending
   test "advancing" do
     robot1 = RobotSimulator.create(:north, {0, 0}) |> RobotSimulator.simulate("A")
     assert RobotSimulator.direction(robot1) == :north
@@ -108,35 +108,35 @@ defmodule RobotSimulatorTest do
     assert RobotSimulator.position(robot4) == {-1, 0}
   end
 
-  @tag :pending
+  # @tag :pending
   test "moving east and north from instructions" do
     robot = RobotSimulator.create(:north, {7, 3}) |> RobotSimulator.simulate("RAALAL")
     assert RobotSimulator.direction(robot) == :west
     assert RobotSimulator.position(robot) == {9, 4}
   end
 
-  @tag :pending
+  # @tag :pending
   test "moving west and north" do
     robot = RobotSimulator.create(:north, {0, 0}) |> RobotSimulator.simulate("LAAARALA")
     assert RobotSimulator.direction(robot) == :west
     assert RobotSimulator.position(robot) == {-4, 1}
   end
 
-  @tag :pending
+  # @tag :pending
   test "moving west and south" do
     robot = RobotSimulator.create(:east, {2, -7}) |> RobotSimulator.simulate("RRAAAAALA")
     assert RobotSimulator.direction(robot) == :south
     assert RobotSimulator.position(robot) == {-3, -8}
   end
 
-  @tag :pending
+  # @tag :pending
   test "moving east and north" do
     robot = RobotSimulator.create(:south, {8, 4}) |> RobotSimulator.simulate("LAAARRRALLLL")
     assert RobotSimulator.direction(robot) == :north
     assert RobotSimulator.position(robot) == {11, 5}
   end
 
-  @tag :pending
+  # @tag :pending
   test "simulate errors on invalid instructions" do
     assert RobotSimulator.create() |> RobotSimulator.simulate("UUDDLRLRBASTART") ==
              {:error, "invalid instruction"}
